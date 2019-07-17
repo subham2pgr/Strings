@@ -1,0 +1,56 @@
+#include<unordered_map>
+#include<vector>
+#include<algorithm>
+using namespace std;
+void printAnagram(unordered_map<string,vector<string>>&store){
+    unordered_map<string,vector<string>>::iterator it;
+    for(it=store.begin();it!=store.end();it++){
+        vector<string>tempvec(it->second);
+        int size=tempvec.size();
+        if(size>1){
+            for(int i=0;i<size;i++){
+            
+                cout<<tempvec[i]<<" ";
+            }
+            cout << "\n"; 
+        }
+    }
+}
+void storeInMap(vector<string>&vec){
+    unordered_map<string,vector<string>>store;
+    for(int i=0;i<vec.size();i++){
+        string tempString(vec[i]);
+        sort(tempString.begin(),tempString.end());
+        if(store.find(tempString)==store.end()){
+            vector<string>temp;
+            temp.push_back(vec[i]);
+            store.insert(make_pair(tempString,temp));
+            
+        }
+        else{
+            vector<string>temp(store[tempString]);
+            temp.push_back(vec[i]);
+            store[tempString]=temp;
+        }
+    }
+    printAnagram(store);
+}
+
+int main() 
+{ 
+    // initialize vector of strings 
+    vector<string> arr; 
+    arr.push_back("geeksquiz"); 
+    arr.push_back("geeksforgeeks"); 
+    arr.push_back("abcd"); 
+    arr.push_back("forgeeksgeeks"); 
+    arr.push_back("zuiqkeegs"); 
+    arr.push_back("cat"); 
+    arr.push_back("act"); 
+    arr.push_back("tca"); 
+  
+    // utility function for storing strings 
+    // into hashmap 
+    storeInMap(arr); 
+    return 0; 
+} 
