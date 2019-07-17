@@ -1,0 +1,24 @@
+#include <iostream>
+#define NO_OF_CHARS 26
+using namespace std;
+int countDeletions(string str1, string str2) {
+    int count[NO_OF_CHARS] = {0};
+ 
+    for(int i=0;i<str1.length();i++){
+        count[str1[i]-'a']++;
+    }
+    for(int i=0;i<str2.length();i++){
+        count[str2[i]-'a']--;
+    }    
+        long long int ans=0;
+        for(int j=0;j<NO_OF_CHARS;j++){
+            ans+=abs(count[j]);
+        }
+    return ans;
+}
+
+int main() { 
+    string str1 = "bcadeh", str2 = "hea"; 
+    cout << countDeletions(str1, str2); 
+    return 0; 
+}  
