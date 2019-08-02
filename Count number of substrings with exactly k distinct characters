@@ -1,0 +1,45 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include<iostream>
+#define MAX_CHARS 26
+using namespace std;
+int countkDist(string str,int k){
+    int n=str.length();
+    int res=0;
+    for(int i=0;i<n;i++){
+        int count[MAX_CHARS]={0};
+        int dist_count=0;
+        for(int j=i;j<n;j++){
+            if(count[str[j]-'a']==0)
+            {
+             dist_count++;   
+            }
+            count[str[j]-'a']++;
+            if(dist_count==k)
+            {
+                res++;
+            }
+            if(dist_count>k){
+                break;
+            }
+        }
+    }
+    return res;
+}
+    
+
+int main() 
+{ 
+    string str = "abcbaa"; 
+    int k = 3; 
+    cout << "Total substrings with exactly "
+         << k <<" distinct characters :"
+         << countkDist(str, k) << endl; 
+    return 0; 
+} 
