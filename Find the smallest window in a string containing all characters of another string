@@ -1,0 +1,53 @@
+
+#include<iostream>
+#include<climits>
+#define no_of_chars 256
+using namespace std;
+string findSubString (string str,string pat){
+    int len1=str.length();
+    int len2=pat.length();
+    int hashstr[no_of_chars]={0};
+    int hashptr[no_of_chars]={0};
+    for (int i=0;i<len2;i++){
+        hashptr[pat[i]]++;
+    }
+    int count=0;
+    int start=0;
+    
+    int minlen=INT_MAX;
+    int start_index=-1;
+    for(int j=0;j<len1;j++){
+        hashstr[str[j]]++;
+        if(hashptr[str[j]]!=0 && (hashstr[str[j]]<=hashptr[str[j]]))
+        {
+            count++;
+        }
+        if(count==len2){
+            while(hashptr[str[start]]==0 || (hashstr[str[start]]>hashptr[str[start]])){
+                if(hashstr[str[start]]>hashptr[str[start]]){
+                    hashstr[str[start]]--;
+                }
+                start++;    
+            }
+            
+            
+            int index=j-start+1;
+            if(minlen>index){
+                minlen=index;
+                start_index=start;
+            }
+            
+            
+        }
+    }
+    return str.substr(start_index,minlen);
+}
+int main() 
+{ 
+    string str = "this is a test string"; 
+    string pat = "tist"; 
+  
+    cout << "Smallest window is : \n"
+        << findSubString(str, pat); 
+    return 0; 
+} 
