@@ -1,0 +1,41 @@
+#include <iostream>
+#define MAX_CHARS 26
+using namespace std;
+bool check(int freq[],int k){
+    for(int i=0;i<MAX_CHARS;i++){
+        if(freq[i]&&freq[i]!=k){
+            return false;
+        }
+    }
+    return true;
+}
+int substrings(string s,int k){
+    int n=s.length();
+    int res=0;
+    for(int i=0;i<n;i++){
+        int freq[MAX_CHARS]={0};
+        for(int j=i;j<n;j++){
+            freq[s[j]-'a']++;
+            if(freq[s[j]-'a']>k)
+            {
+                break;
+            }
+            if(freq[s[j]-'a']==k&&check(freq,k)==true){
+                res++;
+            }
+        }
+        
+    }
+    return res;
+}
+
+int main() 
+{ 
+    string s = "aabbcc"; 
+    int k = 2; 
+    cout << substrings(s, k) << endl; 
+  
+    s = "aabbc"; 
+    k = 2; 
+    cout << substrings(s, k) << endl; 
+} 
