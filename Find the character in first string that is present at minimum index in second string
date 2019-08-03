@@ -1,40 +1,51 @@
-#include<iostream>
-#include<climits>
-#include<unordered_map>
-using namespace std;
-char printMinIndexChar(string str,string patt){
-    unordered_map<char,int>um;
-    int min_index=INT_MAX;
-    int m = str.length();
-    int n = patt.length();
-    for(int i=0;i<m;i++){
-        if(um.find(str[i])==um.end()){
-            um[str[i]]=i;
-        }
-    }
-    for(int j=0;j<n;j++){
-        if(um.find(patt[j])!=um.end()&&um[patt[j]]<min_index){
-            min_index=um[patt[j]];
-            
-        }
-    }
-    if(min_index!=INT_MAX){
-        
-    
-    return str[min_index];
-    }
-    else {
-        return 'N';
-    }
-}
+#include <bits/stdc++.h> 
+using namespace std; 
+  
+// function to find the minimum index character 
+void printMinIndexChar(string str, string patt) 
+{ 
+    // to store the index of character having 
+    // minimum index 
+    int minIndex = INT_MAX; 
+  
+    // lengths of the two strings 
+    int m = str.size(); 
+    int n = patt.size(); 
+  
+    // traverse 'patt' 
+    for (int i = 0; i < n; i++) { 
+  
+        // for each character of 'patt' traverse 'str' 
+        for (int j = 0; j < m; j++) { 
+  
+            // if patt[i] is found in 'str', check if 
+            // it has the minimum index or not. If yes,  
+            // then update 'minIndex' and break 
+            if (patt[i] == str[j] && j < minIndex) { 
+                minIndex = j; 
+                break; 
+            } 
+        } 
+    } 
+  
+    // print the minimum index character 
+    if (minIndex != INT_MAX) 
+        cout << "Minimum Index Character = "
+             << str[minIndex]; 
+  
+    // if no character of 'patt' is present in 'str' 
+    else
+        cout << "No character present"; 
+} 
+  
+// Driver program to test above 
 int main() 
 { 
     string str = "geeksforgeeks"; 
     string patt = "set"; 
-    cout<<printMinIndexChar(str, patt); 
+    printMinIndexChar(str, patt); 
     return 0; 
 } 
-
 
 
 2nd solution
